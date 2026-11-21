@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#11111b">
+    <meta name="description" content="TaskFlow: administra tus actividades y recordatorios personales.">
+    <title>TaskFlow | Administrador de actividades</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="brand">
+            <div class="brand-icon">✓</div>
+            <div>
+                <h1>TaskFlow</h1>
+                <span>Organiza tu día</span>
+            </div>
+        </div>
+        <div class="header-actions">
+            <span id="connectionStatus" class="connection online">
+                ● En línea
+            </span>
+            <button id="notificationBtn" class="icon-button" title="Activar notificaciones">
+                ♧
+            </button>
+        </div>
+    </header>
+    <main class="container">
+        <section class="welcome">
+            <div>
+                <p class="date-text" id="currentDate"></p>
+                <h2>¡Hola!</h2>
+                <p class="subtitle">¿Qué tienes planeado para hoy?</p>
+            </div>
+            <button id="addTaskBtn" class="primary-btn">
+                + Nueva actividad
+            </button>
+        </section>
+        <section class="stats">
+            <article class="stat-card">
+                <span class="stat-icon purple">▤</span>
+                <div>
+                    <p>Total de actividades</p>
+                    <h3 id="totalTasks">0</h3>
+                </div>
+            </article>
+            <article class="stat-card">
+                <span class="stat-icon orange">◷</span>
+                <div>
+                    <p>Pendientes</p>
+                    <h3 id="pendingTasks">0</h3>
+                </div>
+            </article>
+            <article class="stat-card">
+                <span class="stat-icon green">✓</span>
+                <div>
+                    <p>Completadas</p>
+                    <h3 id="completedTasks">0</h3>
+                </div>
+            </article>
+        </section>
+        <section class="tasks-section">
+            <div class="section-header">
+                <div>
+                    <h2>Mis actividades</h2>
+                    <p class="subtitle">Administra tus tareas y recordatorios.</p>
+                </div>
+                <button id="refreshBtn" class="secondary-btn">
+                    ↻ Actualizar
+                </button>
+            </div>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">
+                    Todas
+                </button>
+                <button class="filter-btn" data-filter="pending">
+                    Pendientes
+                </button>
+                <button class="filter-btn" data-filter="completed">
+                    Completadas
+                </button>
+            </div>
+            <div id="taskList" class="task-list">
+                <div class="empty-state">
+                    <h3>No hay actividades todavía</h3>
+                    <p>Agrega tu primera actividad para comenzar.</p>
+                </div>
+            </div>
+        </section>
+        <section class="offline-info">
+            <div>
+                <strong>Tu información está protegida</strong>
+                <p>Las actividades se almacenan localmente y puedes consultarlas sin conexión.</p>
+            </div>
+        </section>
+
+    </main>
+      <div id="taskModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h2 id="modalTitle">Nueva actividad</h2>
+                    <p class="subtitle">Completa los datos de tu actividad.</p>
+                </div>
+                <button id="closeModalBtn" class="close-btn">×</button>
+            </div>
+            <form id="taskForm">
+                <input type="hidden" id="taskId">
+                <label for="taskTitle">Título de la actividad</label>
+                <input
+                    type="text"
+                    id="taskTitle"
+                    placeholder="Ej. Estudiar para el examen"
+                    maxlength="80"
+                    required
+                >
+                <label for="taskDescription">Descripción</label>
+                <textarea
+                    id="taskDescription"
+                    placeholder="Agrega detalles de tu actividad..."
+                    rows="3"
+                    maxlength="300"
+                ></textarea>
+                <div class="form-row">
+                    <div>
+                        <label for="taskDate">Fecha</label>
+                        <input type="date" id="taskDate" required>
+                    </div>
+                    <div>
+                        <label for="taskTime">Hora</label>
+                        <input type="time" id="taskTime" required>
+                    </div>
+                </div>
+                <label for="taskPriority">Prioridad</label>
+                <select id="taskPriority">
+                    <option value="low">Baja</option>
+                    <option value="medium" selected>Media</option>
+                    <option value="high">Alta</option>
+                </select>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="taskReminder" checked>
+                    Activar recordatorio
+                </label>
+                <div class="modal-actions">
+                    <button type="button" id="cancelBtn" class="secondary-btn">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="primary-btn">
+                        Guardar actividad
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="js/database.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/sync.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

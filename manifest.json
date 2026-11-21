@@ -1,0 +1,21 @@
+
+{
+    "name": "TaskFlow - Administrador de actividades",
+    "short_name": "TaskFlow",
+    "description": "Organiza tus actividades y recordatorios personales.",
+    "start_url": "./",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "background_color": "#11111b",
+    "theme_color": "#11111b",
+    "lang": "es-MX",
+    "icons": [
+        {
+            "src": "./assets/icon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        }
+    ]
+}
